@@ -21,7 +21,7 @@ function init() {
 
     // Load the JSON file and draw the map
     d3.json("dataset/world2.json").then(function (json) {
-        let properties = json.properties;
+
         svg.selectAll("path")
             .data(json.features)
             .enter()
