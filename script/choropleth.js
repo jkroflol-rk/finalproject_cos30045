@@ -66,7 +66,7 @@ function init() {
                     console.log(color(data.properties.value)); // Log the color value
                     return color(data.properties.value)
                 })
-                .attr("stroke", "white")
+                .attr("stroke", "black")
                 .attr("stroke-width", 1)
                 .on("mouseover", function (event, d) {
                     const centroid = path.centroid(d); // Get the centroid of the country
@@ -78,9 +78,12 @@ function init() {
                         .html(name + "\n" + value)
                         .style("left", (centroid[0] + 10) + "px")
                         .style("top", (centroid[1] + 10) + "px");
+                    d3.select(this).attr("stroke", "black");
+                    d3.select(this).attr("stroke-width", "3");
                 })
                 .on("mouseout", function (d) {
-
+                    d3.select(this).attr("stroke", "black");
+                    d3.select(this).attr("stroke-width", "1");
                     d3.select(".tooltip").style("opacity", 0);
                 });
             console.log(json.features)
