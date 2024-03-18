@@ -10,6 +10,7 @@ function init() {
         .style("padding", "5px")
         .style("border-radius", "5px")
         .style("visibility", "hidden");
+        
     // Create a new projection using the Mercator projection
     let projection = d3.geoNaturalEarth1()
         .center([0, 0])
