@@ -1,6 +1,13 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 #chart {
     width: 100%;
 }
+
 .tooltip {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
@@ -10,4 +17,11 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
-  }
+}
+
+footer {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
