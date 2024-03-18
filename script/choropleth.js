@@ -10,7 +10,7 @@ function init() {
         .style("padding", "5px")
         .style("border-radius", "5px")
         .style("visibility", "hidden");
-        
+
     // Create a new projection using the Mercator projection
     let projection = d3.geoNaturalEarth1()
         .center([0, 0])
@@ -70,12 +70,12 @@ function init() {
                 .attr("stroke-width", 1)
                 .on("mouseover", function (event, d) {
                     const centroid = path.centroid(d); // Get the centroid of the country
-                    const name = d.properties.value; // Get the name of the country
-
+                    const name = d.properties.name; // Get the name of the country
+                    const value = d.properties.value;
                     // Show tooltip
                     d3.select(".tooltip")
                         .style("opacity", 1)
-                        .html(name)
+                        .html(name + "\n" + value)
                         .style("left", (centroid[0] + 10) + "px")
                         .style("top", (centroid[1] + 10) + "px");
                 })
