@@ -11,6 +11,10 @@ function init() {
         .style("border-radius", "5px")
         .style("visibility", "hidden");
 
+    // const route = d3.select("body")
+    //     .append("path")
+    //     .attr("d", path(link))
+
     // Create a new projection using the Mercator projection
     let projection = d3.geoNaturalEarth1()
         .center([0, 0])
@@ -20,18 +24,7 @@ function init() {
     // Create a new path using the projection
     let path = d3.geoPath()
         .projection(projection);
-    // var color = d3.scaleQuantize().range([
-    //     '#deebf7',
-    //     '#c6dbef',
-    //     '#9ecae1',
-    //     '#6baed6',
-    //     '#4292c6',
-    //     '#2171b5',
-    //     '#08519c',
-    //     '#08306b'
-    // ])
-    //     .domain([0, 10000]) // Define the domain of the color scale
-    //     .unknown('grey'); // Define the color for unknown values
+
     var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 50000]).unknown('grey');
 
     // Create a new SVG element
@@ -86,6 +79,17 @@ function init() {
                     d3.select(this).attr("stroke", "black");
                     d3.select(this).attr("stroke-width", "2");
 
+                    let path2 = d3.path();
+
+                    path2.moveTo(centroid[0], centroid[1]);
+                    path2.lineTo(995, 515);
+
+                    svg.append("path")
+                        .attr("id", "route")
+                        .attr("d", path2)
+                        .attr("stroke", "orange")
+                        .attr("stroke-width", 2);
+
                     d3.selectAll(".country")
                         .transition()
                         .duration(100)
@@ -103,6 +107,7 @@ function init() {
                         .transition()
                         .duration(100)
                         .style("opacity", 1)
+                    d3.select("#route").remove();
                 });
             console.log(json.features)
         });
