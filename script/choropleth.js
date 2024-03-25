@@ -20,18 +20,20 @@ function init() {
     // Create a new path using the projection
     let path = d3.geoPath()
         .projection(projection);
-    var color = d3.scaleQuantize().range([
-        '#deebf7',
-        '#c6dbef',
-        '#9ecae1',
-        '#6baed6',
-        '#4292c6',
-        '#2171b5',
-        '#08519c',
-        '#08306b'
-    ])
-        .domain([0, 10000]) // Define the domain of the color scale
-        .unknown('grey'); // Define the color for unknown values
+    // var color = d3.scaleQuantize().range([
+    //     '#deebf7',
+    //     '#c6dbef',
+    //     '#9ecae1',
+    //     '#6baed6',
+    //     '#4292c6',
+    //     '#2171b5',
+    //     '#08519c',
+    //     '#08306b'
+    // ])
+    //     .domain([0, 10000]) // Define the domain of the color scale
+    //     .unknown('grey'); // Define the color for unknown values
+    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 50000]).unknown('grey');
+
     // Create a new SVG element
     let svg = d3.select("#chart")
         .append("svg")
@@ -66,8 +68,11 @@ function init() {
                     console.log(color(data.properties.value)); // Log the color value
                     return color(data.properties.value)
                 })
+                .attr("class", function (d) {
+                    return "country"
+                })
                 .attr("stroke", "black")
-                .attr("stroke-width", 1)
+                .attr("stroke-width", 0.2)
                 .on("mouseover", function (event, d) {
                     const centroid = path.centroid(d); // Get the centroid of the country
                     const name = d.properties.name; // Get the name of the country
@@ -79,15 +84,29 @@ function init() {
                         .style("left", (centroid[0] + 10) + "px")
                         .style("top", (centroid[1] + 10) + "px");
                     d3.select(this).attr("stroke", "black");
-                    d3.select(this).attr("stroke-width", "3");
+                    d3.select(this).attr("stroke-width", "2");
+
+                    d3.selectAll(".country")
+                        .transition()
+                        .duration(100)
+                        .style("opacity", .5)
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .style("opacity", 1)
                 })
                 .on("mouseout", function (d) {
                     d3.select(this).attr("stroke", "black");
-                    d3.select(this).attr("stroke-width", "1");
+                    d3.select(this).attr("stroke-width", "0.2");
                     d3.select(".tooltip").style("opacity", 0);
+                    d3.selectAll(".country")
+                        .transition()
+                        .duration(100)
+                        .style("opacity", 1)
                 });
             console.log(json.features)
         });
     })
 }
+
 window.onload = init;
