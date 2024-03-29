@@ -2,6 +2,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
 
 #chart {
@@ -21,7 +22,7 @@ body {
 
 footer {
     margin: 0;
-    padding: 10px;
+    padding: 10;
     text-align: center;
     background-color: #f4f4f4;
 }

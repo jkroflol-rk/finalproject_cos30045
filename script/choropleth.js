@@ -1,6 +1,7 @@
 function init() {
     let w = 1000;
     let h = 700;
+    const sensitivity = 75;
 
 
     const tooltip = d3.select("body")
@@ -16,23 +17,33 @@ function init() {
     //     .attr("d", path(link))
 
     // Create a new projection using the Mercator projection
-    let projection = d3.geoNaturalEarth1()
+    let projection = d3.geoOrthographic()
         .center([0, 0])
-        .scale(w / 1.5 / Math.PI)
+        .scale(250)
+        .rotate([200, 50])
         .translate([w / 2, h / 2]);
 
     // Create a new path using the projection
     let path = d3.geoPath()
         .projection(projection);
 
-    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 50000]).unknown('grey');
+    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 500000]).unknown('grey');
+
+    const initialScale = projection.scale()
 
     // Create a new SVG element
-    let svg = d3.select("#chart")
+    let svg = d3.select("#map")
         .append("svg")
         .attr("width", w)
         .attr("height", h)
-        .attr("fill", "lightblue");
+
+    let globe = svg.append("circle")
+        .attr("fill", "#EEE")
+        .attr("stroke", "#000")
+        .attr("stroke-width", "0.2")
+        .attr("cx", w / 2)
+        .attr("cy", h / 2)
+        .attr("r", initialScale)
 
     // Load the JSON file and draw the map
     d3.csv("dataset/arrival_nz.csv").then(function (d) {
@@ -42,8 +53,6 @@ function init() {
                 var dataValue = parseFloat(d[i].Total); // Get the unemployment rate from the CSV data
                 for (var j = 0; j < json.features.length; j++) {
                     var jsonState = json.features[j].properties.name; // Get the LGA name from the JSON data
-                    console.log(dataState);
-
 
                     // Check if the LGA names match
                     if (dataState == jsonState) {
@@ -57,8 +66,8 @@ function init() {
                 .enter()
                 .append("path")
                 .attr("d", path)
-                .attr("fill", function (data, i) {
-                    console.log(color(data.properties.value)); // Log the color value
+                .attr("fill", function (data) {
+                    //console.log(color(data.properties.value)); // Log the color value
                     return color(data.properties.value)
                 })
                 .attr("class", function (d) {
@@ -79,16 +88,16 @@ function init() {
                     d3.select(this).attr("stroke", "black");
                     d3.select(this).attr("stroke-width", "2");
 
-                    let path2 = d3.path();
-
-                    path2.moveTo(centroid[0], centroid[1]);
-                    path2.lineTo(995, 515);
-
-                    svg.append("path")
-                        .attr("id", "route")
-                        .attr("d", path2)
-                        .attr("stroke", "orange")
-                        .attr("stroke-width", 2);
+                    // let path2 = d3.path();
+                    //
+                    // path2.moveTo(centroid[0], centroid[1]);
+                    // path2.lineTo(995, 515);
+                    //
+                    // svg.append("path")
+                    //     .attr("id", "route")
+                    //     .attr("d", path2)
+                    //     .attr("stroke", "orange")
+                    //     .attr("stroke-width", 2);
 
                     d3.selectAll(".country")
                         .transition()
@@ -112,6 +121,43 @@ function init() {
             console.log(json.features)
         });
     })
+
+    //Optional rotate
+    // d3.timer(function (elapsed) {
+    //     const rotate = projection.rotate()
+    //     const k = sensitivity / projection.scale()
+    //     projection.rotate([
+    //         rotate[0] - 1 * k,
+    //         rotate[1]
+    //     ])
+    //     path = d3.geoPath().projection(projection)
+    //     svg.selectAll("path").attr("d", path)
+    // }, 200)
+
+    let zoom = d3.zoom().on('zoom', function (event) {
+        if (event.transform.k > 0.3) {
+            projection.scale(initialScale * event.transform.k)
+            path = d3.geoPath().projection(projection)
+            svg.selectAll("path").attr("d", path)
+            globe.attr("r", projection.scale())
+        } else {
+            event.transform.k = 0.3
+        }
+    });
+
+    let drag = d3.drag().on('drag', function (event) {
+        const rotate = projection.rotate()
+        const k = sensitivity / projection.scale()
+        projection.rotate([
+            rotate[0] + event.dx * k,
+            rotate[1] - event.dy * k
+        ])
+        path = d3.geoPath().projection(projection)
+        svg.selectAll("path").attr("d", path)
+    });
+
+    svg.call(zoom);
+    svg.call(drag);
 }
 
 window.onload = init;
