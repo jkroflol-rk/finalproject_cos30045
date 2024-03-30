@@ -1,12 +1,21 @@
 body {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    position: relative;
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    background-image: url(../assets/nz.jpg);
+    background-size: cover;
 }
 
-#chart {
-    width: 100%;
+body::after {
+    content: '';
+    display: block;
+    height: 50px; /* Set same as footer's height */
+}
+
+#map svg {
+    /*border: 1px solid #f4f4f4;*/
 }
 
 .tooltip {
@@ -20,7 +29,21 @@ body {
     transition: opacity 0.3s ease;
 }
 
+#intro {
+    text-align: center;
+}
+
+#viz {
+    /*background: white;*/
+    margin: 0;
+    padding: 0;
+}
+
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
     margin: 0;
     padding: 10;
     text-align: center;
