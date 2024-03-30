@@ -139,7 +139,7 @@ function init() {
                         .attr('cx', nzCentroid[0])
                         .attr('cy', nzCentroid[1])
                         .transition()
-                        .duration(5000)
+                        .duration(2000)
                         .attrTween('cx', function () {
                             return function (t) {
                                 const currentCoord = geoInterpolator(t);
