@@ -3,6 +3,8 @@ function init() {
     let h = 700;
     const sensitivity = 75;
 
+    let nzLocation = [];
+    let nzCentroid;
 
     const tooltip = d3.select("body")
         .append("div")
@@ -12,10 +14,6 @@ function init() {
         .style("border-radius", "5px")
         .style("visibility", "hidden");
 
-    // const route = d3.select("body")
-    //     .append("path")
-    //     .attr("d", path(link))
-
     // Create a new projection using the Mercator projection
     let projection = d3.geoOrthographic()
         .center([0, 0])
@@ -23,14 +21,12 @@ function init() {
         .rotate([190, 50])
         .translate([w / 2, h / 2]);
 
+
+    const initialScale = projection.scale()
     // Create a new path using the projection
     let path = d3.geoPath()
         .projection(projection);
 
-    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 500000]).unknown('grey');
-
-    const initialScale = projection.scale()
-    // Create a new SVG element
     let svg = d3.select("#map")
         .append("svg")
         .attr("width", w)
@@ -44,13 +40,8 @@ function init() {
         .attr("cy", h / 2)
         .attr("r", initialScale)
 
-    let nzLocation = [];
-
-    // Create interpolator for animation
-
-    let nzCentroid;
-
-    // Create interpolator for animation
+    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 1000]).unknown('grey');
+    let selectedValue = 2013;
 
 
     var geoGenerator = d3.geoPath()
@@ -58,11 +49,16 @@ function init() {
         .pointRadius(4);
 
     // Load the JSON file and draw the map
-    d3.csv("dataset/arrival_nz.csv").then(function (d) {
+    d3.csv("dataset/NZ_MIGRATION.csv").then(function (d) {
         d3.json("dataset/world.json").then(function (json) {
+            let dataValue;
             for (var i = 0; i < d.length; i++) {
-                var dataState = d[i].Country; // Get the LGA from the CSV data
-                var dataValue = parseFloat(d[i].Total); // Get the unemployment rate from the CSV data
+                let dataState = d[i].country; // Get the LGA from the CSV 
+                let dataYear = parseInt(d[i].year);
+                if (dataYear == selectedValue) {
+                    console.log(dataYear);
+                    dataValue = parseFloat(d[i].estimate);
+                }// Get the unemployment rate from the CSV data
                 for (var j = 0; j < json.features.length; j++) {
                     var jsonState = json.features[j].properties.name; // Get the LGA name from the JSON data
 
@@ -72,9 +68,7 @@ function init() {
                         nzLocation = projection.invert(centroid)
 
                     }
-                    if (jsonState == "Australia") {
-                        ausLocation = path.centroid(json.features[j]);
-                    }
+
                     // Check if the LGA names match
                     if (dataState == jsonState) {
                         json.features[j].properties.value = dataValue; // Set the value property in the JSON data
@@ -82,8 +76,52 @@ function init() {
                     }
                 }
             }
+            function updateJson() {
+                for (var j = 0; j < json.features.length; j++) {
+                    json.features[j].properties.value = undefined;
+                }
+                //code for setting the value as per the filter
+                for (var i = 0; i < d.length; i++) {
+                    let dataState = d[i].country; // Get the LGA from the CSV 
+                    let dataYear = parseInt(d[i].year);
+                    if (dataYear == selectedValue) {
+                        console.log(dataYear);
+                        dataValue = parseFloat(d[i].estimate);
+                    }// Get the unemployment rate from the CSV data
+                    for (var j = 0; j < json.features.length; j++) {
+                        var jsonState = json.features[j].properties.name; // Get the LGA name from the JSON data
 
+                        if (jsonState == "New Zealand") {
+                            const centroid = path.centroid(json.features[j]);
+                            nzCentroid = path.centroid(json.features[j]);
+                            nzLocation = projection.invert(centroid)
 
+                        }
+
+                        // Check if the LGA names match
+                        if (dataState == jsonState) {
+                            json.features[j].properties.value = dataValue; // Set the value property in the JSON data
+                            break;
+                        }
+                    }
+                }
+            }
+            d3.select("#mySlider").on("change", async function (d) {
+                selectedValue = this.value;
+                console.log(selectedValue);
+                updateJson();
+                svg.selectAll("path").attr("fill", function (data) {
+                    if (data.properties.name === "New Zealand") {
+                        return "red";
+                    } else {
+                        return color(data.properties.value);
+                    }
+                })
+                    .attr("class", function (d) {
+                        return "country"
+                    }).transition().duration(2000);
+
+            })
             svg.selectAll("path")
                 .data(json.features)
                 .enter()
@@ -106,6 +144,8 @@ function init() {
                     const lonlat = projection.invert(centroid)
                     const name = d.properties.name; // Get the name of the country
                     const value = d.properties.value;
+
+
                     // Show tooltip
                     d3.select(".tooltip")
                         .style("opacity", 1)
@@ -120,10 +160,13 @@ function init() {
                         .transition()
                         .duration(100)
                         .style("opacity", .5)
+
                     d3.select(this)
                         .transition()
                         .duration(100)
                         .style("opacity", 1)
+
+
                     var geoInterpolator = d3.geoInterpolate(nzLocation, lonlat);
                     svg.append('path')
                         .datum({ type: 'LineString', coordinates: [nzLocation, lonlat] })
@@ -169,21 +212,13 @@ function init() {
                 });
 
             console.log(nzLocation);
-            console.log(ausLocation);
-
         });
     })
 
     let zoom = d3.zoom().on('zoom', function (event) {
         if (event.transform.k > 0.3) {
             projection.scale(initialScale * event.transform.k)
-            // svg.selectAll(".centroid-circle")
-            //     .attr("cx", function (d) {
-            //         return path.centroid(d)[0];
-            //     })
-            //     .attr("cy", function (d) {
-            //         return path.centroid(d)[1];
-            //     });
+
             path = d3.geoPath().projection(projection)
             svg.selectAll("path").attr("d", path)
             globe.attr("r", projection.scale())
@@ -202,20 +237,53 @@ function init() {
             rotate[1] - event.dy * k
         ])
 
-        // svg.selectAll(".centroid-circle")
-        //     .attr("cx", function (d) {
-        //         return path.centroid(d)[0];
-        //     })
-        //     .attr("cy", function (d) {
-        //         return path.centroid(d)[1];
-        //     });
+
         path = d3.geoPath().projection(projection)
         svg.selectAll("path").attr("d", path)
 
 
     });
 
+    function drawColorScaleBar(colorScale) {
+        const legendSvg = d3.select("#legend")
+            .append("svg")
+            .attr("width", 200)
+            .attr("height", 20);
 
+        const gradient = legendSvg.append("defs")
+            .append("linearGradient")
+            .attr("id", "colorGradient")
+            .attr("x1", "0%")
+            .attr("x2", "100%")
+            .attr("y1", "0%")
+            .attr("y2", "0%");
+
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", colorScale(0));
+
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", colorScale(1000));
+
+        legendSvg.append("rect")
+            .attr("width", 200)
+            .attr("height", 20)
+            .style("fill", "url(#colorGradient)");
+
+        const legendAxis = d3.axisBottom(colorScale)
+            .ticks(5)
+            .tickSize(0)
+            .tickFormat(d3.format(".0f"));
+
+        legendSvg.append("g")
+            .attr("transform", "translate(0, 20)")
+            .call(legendAxis);
+    }
+
+    // Call the function passing your color scale
+
+    drawColorScaleBar(color);
     svg.call(drag);
     svg.call(zoom);
 }
