@@ -156,8 +156,9 @@ function init() {
         svg.selectAll("path").attr("d", path)
     });
 
-    svg.call(zoom);
     svg.call(drag);
+    svg.call(zoom);
+
 }
 
 window.onload = init;
