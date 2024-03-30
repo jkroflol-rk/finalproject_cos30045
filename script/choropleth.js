@@ -12,11 +12,9 @@ function init() {
         .style("border-radius", "5px")
         .style("visibility", "hidden");
 
-    const config = {
-        speed: 0.010,
-        verticalTilted: -10,
-        horizontalTilted: 0
-    }
+    // const route = d3.select("body")
+    //     .append("path")
+    //     .attr("d", path(link))
 
     // Create a new projection using the Mercator projection
     let projection = d3.geoOrthographic()
@@ -28,11 +26,10 @@ function init() {
     // Create a new path using the projection
     let path = d3.geoPath()
         .projection(projection);
-    Rotate()
+
     var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 500000]).unknown('grey');
 
     const initialScale = projection.scale()
-
     // Create a new SVG element
     let svg = d3.select("#map")
         .append("svg")
@@ -124,15 +121,6 @@ function init() {
         });
     })
 
-    function Rotate() {
-        d3.timer(function (elapsed) {
-            projection.rotate(
-                [config.speed * elapsed - 120,
-                config.verticalTilted,
-                config.horizontalTilted]);
-            svg.selectAll("path").attr("d", path);
-        });
-    }
     let zoom = d3.zoom().on('zoom', function (event) {
         if (event.transform.k > 0.3) {
             projection.scale(initialScale * event.transform.k)
@@ -155,8 +143,9 @@ function init() {
         svg.selectAll("path").attr("d", path)
     });
 
-    svg.call(zoom);
+
     svg.call(drag);
+    svg.call(zoom);
 }
 
 window.onload = init;
