@@ -20,7 +20,7 @@ function init() {
     let projection = d3.geoOrthographic()
         .center([0, 0])
         .scale(250)
-        .rotate([190, 50])
+        .rotate([200, 50])
         .translate([w / 2, h / 2]);
 
     // Create a new path using the projection
@@ -30,6 +30,7 @@ function init() {
     var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 500000]).unknown('grey');
 
     const initialScale = projection.scale()
+
     // Create a new SVG element
     let svg = d3.select("#map")
         .append("svg")
@@ -66,11 +67,8 @@ function init() {
                 .append("path")
                 .attr("d", path)
                 .attr("fill", function (data) {
-                    if (data.properties.name === "New Zealand") {
-                        return "red";
-                    } else {
-                        return color(data.properties.value);
-                    }
+                    //console.log(color(data.properties.value)); // Log the color value
+                    return color(data.properties.value)
                 })
                 .attr("class", function (d) {
                     return "country"
@@ -124,6 +122,18 @@ function init() {
         });
     })
 
+    //Optional rotate
+    // d3.timer(function (elapsed) {
+    //     const rotate = projection.rotate()
+    //     const k = sensitivity / projection.scale()
+    //     projection.rotate([
+    //         rotate[0] - 1 * k,
+    //         rotate[1]
+    //     ])
+    //     path = d3.geoPath().projection(projection)
+    //     svg.selectAll("path").attr("d", path)
+    // }, 200)
+
     let zoom = d3.zoom().on('zoom', function (event) {
         if (event.transform.k > 0.3) {
             projection.scale(initialScale * event.transform.k)
@@ -146,9 +156,9 @@ function init() {
         svg.selectAll("path").attr("d", path)
     });
 
-
     svg.call(drag);
     svg.call(zoom);
+
 }
 
 window.onload = init;
