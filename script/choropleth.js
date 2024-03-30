@@ -20,7 +20,7 @@ function init() {
     let projection = d3.geoOrthographic()
         .center([0, 0])
         .scale(250)
-        .rotate([200, 50])
+        .rotate([190, 50])
         .translate([w / 2, h / 2]);
 
     // Create a new path using the projection
@@ -66,8 +66,11 @@ function init() {
                 .append("path")
                 .attr("d", path)
                 .attr("fill", function (data) {
-                    //console.log(color(data.properties.value)); // Log the color value
-                    return color(data.properties.value)
+                    if (data.properties.name === "New Zealand") {
+                        return "red";
+                    } else {
+                        return color(data.properties.value);
+                    }
                 })
                 .attr("class", function (d) {
                     return "country"
