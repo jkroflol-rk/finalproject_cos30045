@@ -1,13 +1,12 @@
 body {
     min-height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
     margin: 0;
-    font-family: Arial, sans-serif;
 }
 
-#map svg {
-    border: 1px solid #333;
-
+#chart {
+    width: 100%;
 }
 
 .tooltip {
@@ -21,19 +20,9 @@ body {
     transition: opacity 0.3s ease;
 }
 
-body::after {
-  content: '';
-  display: block;
-  height: 50px; /* Set same as footer's height */
-}
-
 footer {
-    padding-top: 10px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    height: 50px;
+    margin: 0;
+    padding: 10;
     text-align: center;
-    color: aliceblue;
+    background-color: #f4f4f4;
 }
