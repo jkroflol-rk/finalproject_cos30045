@@ -1,3 +1,4 @@
+
 function init() {
     let w = 1000;
     let h = 700;
@@ -209,6 +210,11 @@ function init() {
                     d3.select("#route").remove();
                     d3.select('#lineCountry').remove();
                     d3.select("#runningCircle").remove();
+                })
+                .on("click", function (event, d) {
+                    const name = d.properties.name;
+                    d3.select("#line").remove();
+                    drawGraph(name);
                 });
 
             console.log(nzLocation);
@@ -264,7 +270,7 @@ function init() {
 
         gradient.append("stop")
             .attr("offset", "100%")
-            .attr("stop-color", colorScale(1000));
+            .attr("stop-color", colorScale(50000));
 
         legendSvg.append("rect")
             .attr("width", 200)
