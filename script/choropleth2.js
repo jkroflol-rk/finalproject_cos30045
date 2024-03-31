@@ -27,6 +27,7 @@ function init() {
 
     let svg = d3.select("#map")
         .append("svg")
+        .attr("id", "mapSvg")
         .attr("width", w)
         .attr("height", h);
 

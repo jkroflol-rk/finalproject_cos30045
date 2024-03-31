@@ -288,4 +288,4 @@ function init() {
     svg.call(zoom);
 }
 
-window.onload = init;
+window.addEventListener('load', init);
