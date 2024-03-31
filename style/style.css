@@ -5,7 +5,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: white;
     background-image: url(../assets/nz.jpg);
-    background-size: fill;
+    background-size: cover;
 }
 
 #map svg {
