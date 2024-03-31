@@ -15,7 +15,7 @@ body::after {
 }
 
 #map svg {
-    border: 1px solid #f4f4f4;
+    border: 1px solid #3e3e3e;
 }
 
 .tooltip {
@@ -35,8 +35,9 @@ body::after {
 }
 
 #viz {
+    color: black;
     position: relative;
-    background: #3d3c3c;
+    background: white;
     margin: 0;
     padding: 0;
 }
