@@ -11,6 +11,10 @@ body{
     display: flex;
 }
 
+#diagram2 {
+    display: flex;
+}
+
 #map svg{
     width: 100%;
     height: 100%;

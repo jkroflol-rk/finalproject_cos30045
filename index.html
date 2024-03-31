@@ -5,6 +5,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="style/style.css"/>
+    <link rel="stylesheet" href="style/structure.css"/>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -19,147 +20,150 @@
 </head>
 
 <body>
-    <script src="script/choropleth.js"></script>
-    <script src="script/linegraph.js"></script>
-    <!-- Main heading -->
-    <div id="intro">
-        <h1>New Zealand Migration</h1>
+<script src="script/choropleth.js"></script>
+<script src="script/linegraph.js"></script>
+<!-- Main heading -->
+<div id="intro">
+    <h1>New Zealand Migration</h1>
+    <p>
+        This visualisation shows the migration patterns of New Zealanders
+        between 2000 and 2020. The data is sourced from the New Zealand
+        Department of Statistics.
+    </p>
+</div>
+<div id="viz">
+    <div class="content">
+        <h1>Arrival choropleth map</h1>
         <p>
-            This visualisation shows the migration patterns of New Zealanders
-            between 2000 and 2020. The data is sourced from the New Zealand
-            Department of Statistics.
+            Discover the flow of migration to New Zealand with our interactive
+            choropleth map. This dynamic visualization allows users to track
+            migration patterns over the years using a convenient slider feature.
+            Hover over individual countries to uncover detailed information,
+            including the number of people arriving from each location. Whether
+            exploring historical trends or examining recent migration data, our
+            map provides valuable insights into the diverse origins of New
+            Zealand's population influx.
         </p>
     </div>
-    <div id="viz">
-        <div class="content">
-            <h1>Arrival choropleth map</h1>
-            <p>
-                Discover the flow of migration to New Zealand with our interactive
-                choropleth map. This dynamic visualization allows users to track
-                migration patterns over the years using a convenient slider feature.
-                Hover over individual countries to uncover detailed information,
-                including the number of people arriving from each location. Whether
-                exploring historical trends or examining recent migration data, our
-                map provides valuable insights into the diverse origins of New
-                Zealand's population influx.
-            </p>
-        </div>
-      <div id="globeContainer">
+    <div id="globeContainer">
         <div class="tooltip"></div>
         <div id="legend"></div>
         <input
-          type="range"
-          name="mySlider"
-          id="mySlider"
-          min="2013"
-          max="2023"
+                type="range"
+                name="mySlider"
+                id="mySlider"
+                min="2013"
+                max="2023"
         />
         <div id="diagram">
-          <div id="map"></div>
-          <div id="lineGraph"></div>
+            <div id="map"></div>
+            <div id="lineGraph"></div>
         </div>
-      </div>
-        <br/>
-        <div class="content">
-            <h1>The diversity of purpose and age group</h1>
-            <p>
-                Discover the diversity of purpose and age group in migration to New
-                Zealand with our interactive radar chart. This dynamic visualization
-                allows users to toggle between age groups and visa purposes, providing
-                insights into the multifaceted nature of migration patterns. Whether
-                exploring the distribution of age groups or examining the varied
-                purposes behind migration, our radar chart offers valuable insights
-                into the demographic and motivational aspects of New Zealand's
-                migration influx.
-            </p>
-        </div>
+    </div>
+    <br/>
+    <div class="content">
+        <h1>The diversity of purpose and age group</h1>
+        <p>
+            Discover the diversity of purpose and age group in migration to New
+            Zealand with our interactive radar chart. This dynamic visualization
+            allows users to toggle between age groups and visa purposes, providing
+            insights into the multifaceted nature of migration patterns. Whether
+            exploring the distribution of age groups or examining the varied
+            purposes behind migration, our radar chart offers valuable insights
+            into the demographic and motivational aspects of New Zealand's
+            migration influx.
+        </p>
+    </div>
+    <div id="diagram2">
         <div class="radarChart"></div>
         <div id="treemap"></div>
-        <script src="script/treemap.js"></script>
+    </div>
 
-        <script src="script/radarChart.js"></script>
-        <script>
-            /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+    <script src="script/treemap.js"></script>
 
-            //draw the radar chart
+    <script src="script/radarChart.js"></script>
+    <script>
+        /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
 
-            let color = d3.scaleOrdinal().range(["#EDC951", "#CC333F", "#00A0B0"]);
+        //draw the radar chart
 
-            //set up the radar chart
+        let color = d3.scaleOrdinal().range(["#EDC951", "#CC333F", "#00A0B0"]);
 
-            var margin = {top: 100, right: 100, bottom: 100, left: 100},
-                width =
-                    Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-                height = Math.min(
-                    width,
-                    window.innerHeight - margin.top - margin.bottom - 20
-                );
+        //set up the radar chart
 
-            let radarChartOptions = {
-                w: width,
-                h: height,
-                margin: margin,
-                maxValue: 0.5,
-                levels: 5,
-                roundStrokes: true,
-                color: color,
-            };
+        var margin = {top: 100, right: 100, bottom: 100, left: 100},
+            width =
+                Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+            height = Math.min(
+                width,
+                window.innerHeight - margin.top - margin.bottom - 20
+            );
 
-            //data
+        let radarChartOptions = {
+            w: width,
+            h: height,
+            margin: margin,
+            maxValue: 0.5,
+            levels: 5,
+            roundStrokes: true,
+            color: color,
+        };
 
-            let dataset = [
-                [
-                    //iPhone
-                    {axis: "NZ and Aus Citizens", value: 10},
-                    {axis: "Visitor", value: 20},
-                    {axis: "Work", value: 30},
-                    {axis: "Student", value: 40},
-                    {axis: "Resident", value: 50},
-                    {axis: "Other", value: 60},
-                ],
-            ];
+        //data
 
-            console.log(dataset);
+        let dataset = [
+            [
+                //iPhone
+                {axis: "NZ and Aus Citizens", value: 10},
+                {axis: "Visitor", value: 20},
+                {axis: "Work", value: 30},
+                {axis: "Student", value: 40},
+                {axis: "Resident", value: 50},
+                {axis: "Other", value: 60},
+            ],
+        ];
 
-            d3.csv("dataset/nz_data.csv").then(function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    if (
-                        data[i].year == 2020 &&
-                        data[i].country == "Vietnam" &&
-                        data[i].citizenship == "non-NZ"
-                    ) {
-                        if (data[i].visa === "NZ and Australian citizens") {
-                            dataset[0][0].value = parseInt(data[i].estimate);
-                            console.log("NZ", data[i].estimate);
-                        }
-                        if (data[i].visa === "Visitor") {
-                            dataset[0][1].value = parseInt(data[i].estimate);
-                            console.log("Visit", data[i].estimate);
-                        }
-                        if (data[i].visa === "Work") {
-                            dataset[0][2].value = parseInt(data[i].estimate);
-                            console.log("Work", data[i].estimate);
-                        }
-                        if (data[i].visa === "Student") {
-                            dataset[0][3].value = parseInt(data[i].estimate);
-                            console.log("Stu", data[i].estimate);
-                        }
-                        if (data[i].visa === "Resident") {
-                            dataset[0][4].value = parseInt(data[i].estimate);
-                            console.log("Res", data[i].estimate);
-                        }
-                        if (data[i].visa === "Other") {
-                            dataset[0][5].value = parseInt(data[i].estimate);
-                            console.log("Other", data[i].estimate);
-                        }
+        console.log(dataset);
+
+        d3.csv("dataset/nz_data.csv").then(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (
+                    data[i].year == 2020 &&
+                    data[i].country == "Vietnam" &&
+                    data[i].citizenship == "non-NZ"
+                ) {
+                    if (data[i].visa === "NZ and Australian citizens") {
+                        dataset[0][0].value = parseInt(data[i].estimate);
+                        console.log("NZ", data[i].estimate);
+                    }
+                    if (data[i].visa === "Visitor") {
+                        dataset[0][1].value = parseInt(data[i].estimate);
+                        console.log("Visit", data[i].estimate);
+                    }
+                    if (data[i].visa === "Work") {
+                        dataset[0][2].value = parseInt(data[i].estimate);
+                        console.log("Work", data[i].estimate);
+                    }
+                    if (data[i].visa === "Student") {
+                        dataset[0][3].value = parseInt(data[i].estimate);
+                        console.log("Stu", data[i].estimate);
+                    }
+                    if (data[i].visa === "Resident") {
+                        dataset[0][4].value = parseInt(data[i].estimate);
+                        console.log("Res", data[i].estimate);
+                    }
+                    if (data[i].visa === "Other") {
+                        dataset[0][5].value = parseInt(data[i].estimate);
+                        console.log("Other", data[i].estimate);
                     }
                 }
-                RadarChart(".radarChart", dataset, radarChartOptions);
-            });
+            }
+            RadarChart(".radarChart", dataset, radarChartOptions);
+        });
 
-            //Call function to draw the Radar chart
-        </script>
-    </div>
+        //Call function to draw the Radar chart
+    </script>
+</div>
 
 <!-- Footer information -->
 <footer>
