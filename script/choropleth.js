@@ -40,7 +40,7 @@ function init() {
         .attr("cy", h / 2)
         .attr("r", initialScale)
 
-    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 5000]).unknown('grey');
+    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 1000]).unknown('grey');
     let selectedValue = 2013;
 
 
