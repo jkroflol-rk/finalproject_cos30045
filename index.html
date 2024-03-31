@@ -65,10 +65,16 @@
 
         //draw the radar chart
 
-        var color = d3.scaleOrdinal()
+        let color = d3.scaleOrdinal()
             .range(["#EDC951", "#CC333F", "#00A0B0"]);
 
-        var radarChartOptions = {
+        //set up the radar chart
+
+        var margin = {top: 100, right: 100, bottom: 100, left: 100},
+            width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+            height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+        let radarChartOptions = {
             w: width,
             h: height,
             margin: margin,
@@ -78,41 +84,55 @@
             color: color
         };
 
-        //set up the radar chart
-
-        var margin = {top: 100, right: 100, bottom: 100, left: 100},
-            width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-            height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-
         //data
 
-        var data = [
+        let dataset = [
 					  [//iPhone
-						{axis:"Battery Life",value:0.22},
-						{axis:"Brand",value:0.28},
-						{axis:"Contract Cost",value:0.29},
-						{axis:"Design And Quality",value:0.17},
-						{axis:"Have Internet Connectivity",value:0.22},
-						{axis:"Large Screen",value:0.02},
-						{axis:"Price Of Device",value:0.21},
-						{axis:"To Be A Smartphone",value:0.50}
+						{axis:"NZ and Aus Citizens",value:10},
+						{axis:"Visitor",value:20},
+						{axis:"Work",value:30},
+						{axis:"Student",value:40},
+						{axis:"Resident",value:50},
+						{axis:"Other",value:60},
 					  ]
 					];
 
-        data[0][0].axis = "Vietnam";
-
-        console.log(data);
+        console.log(dataset);
 
         d3.csv("dataset/nz_data.csv").then(function (data) {
             for (var i = 0; i < data.length; i++) {
-                if (data[i].year == 2020 && data[i].country == "Vietnam") {
-                    // console.table(data[i]);
+                if (data[i].year == 2020 && data[i].country == "Vietnam" && data[i].citizenship == "non-NZ") {
+                    if (data[i].visa === "NZ and Australian citizens"){
+                        dataset[0][0].value = parseInt(data[i].estimate);
+                        console.log("NZ", data[i].estimate)
+                    }
+                    if (data[i].visa === "Visitor"){
+                        dataset[0][1].value = parseInt(data[i].estimate);
+                        console.log("Visit", data[i].estimate)
+                    }
+                    if (data[i].visa === "Work"){
+                        dataset[0][2].value = parseInt(data[i].estimate);
+                        console.log("Work", data[i].estimate)
+                    }
+                    if (data[i].visa === "Student"){
+                        dataset[0][3].value = parseInt(data[i].estimate);
+                        console.log("Stu", data[i].estimate)
+                    }
+                    if (data[i].visa === "Resident"){
+                        dataset[0][4].value = parseInt(data[i].estimate);
+                        console.log("Res", data[i].estimate)
+                    }
+                    if (data[i].visa === "Other"){
+                        dataset[0][5].value = parseInt(data[i].estimate);
+                        console.log("Other", data[i].estimate)
+                    }
                 }
             }
+            RadarChart(".radarChart", dataset, radarChartOptions);
         });
 
         //Call function to draw the Radar chart
-        RadarChart(".radarChart", data, radarChartOptions);
+
     </script>
     </div>
 
