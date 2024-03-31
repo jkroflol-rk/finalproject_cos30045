@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Meta information -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style/style.css" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style/style.css"/>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script/choropleth.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@300&display=swap"
+          rel="stylesheet">
     <title>New Zealand Migration</title>
 
     <style></style>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Main heading -->
     <h1>New Zealand Migration</h1>
     <div class="tooltip"></div>
     <div id="legend"></div>
     <input
-      type="range"
-      name="mySlider"
-      id="mySlider"
-      min="2013"
-      max="2023"
-      value="50"
+            type="range"
+            name="mySlider"
+            id="mySlider"
+            min="2013"
+            max="2023"
+            value="50"
     />
 
     <div id="map"></div>
-    <br />
+    <br/>
     <!-- Footer information -->
     <footer style="color: rgb(112, 128, 144)">
-      COS30045 Data Visualisation - 2024<br />
-      Le Xuan Nhat, Duong Quang Thanh
+        COS30045 Data Visualisation - 2024<br/>
+        Le Xuan Nhat, Duong Quang Thanh
     </footer>
-  </body>
+</body>
 </html>

@@ -177,7 +177,7 @@ function init() {
                         .attr('id', "lineCountry");
                     svg.append('circle')
                         .attr('id', 'runningCircle')
-                        .attr('r', 2)
+                        .attr('r', 5)
                         .attr('fill', 'red')
                         .attr('cx', nzCentroid[0])
                         .attr('cy', nzCentroid[1])
