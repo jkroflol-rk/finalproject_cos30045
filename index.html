@@ -17,25 +17,35 @@
 </head>
 
 <body>
-    <!-- Main heading -->
-    <h1>New Zealand Migration</h1>
-    <div class="tooltip"></div>
-    <div id="legend"></div>
-    <input
-            type="range"
-            name="mySlider"
-            id="mySlider"
-            min="2013"
-            max="2023"
-            value="50"
-    />
+<!-- Main heading -->
+    <div id="intro">
+        <h1>New Zealand Migration</h1>
+        <p>
+            This visualisation shows the migration patterns of New Zealanders between 2000 and 2020.
+            The data is sourced from the New Zealand Department of Statistics.
+        </p>
+    </div>
+    <div id="viz">
+        <h1 class="chartTitle">Arrival and departure choropleth map</h1>
+        <div class="tooltip"></div>
+        <div id="legend"></div>
+        <input
+                type="range"
+                name="mySlider"
+                id="mySlider"
+                min="2013"
+                max="2023"
+                value="50"
+        />
 
-    <div id="map"></div>
-    <br/>
-    <!-- Footer information -->
-    <footer style="color: rgb(112, 128, 144)">
-        COS30045 Data Visualisation - 2024<br/>
-        Le Xuan Nhat, Duong Quang Thanh
-    </footer>
+        <div id="map"></div>
+        <br/>
+    </div>
+
+<!-- Footer information -->
+<footer>
+    COS30045 Data Visualisation - 2024<br/>
+    Le Xuan Nhat, Duong Quang Thanh
+</footer>
 </body>
 </html>

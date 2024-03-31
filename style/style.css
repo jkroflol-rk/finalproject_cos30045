@@ -15,12 +15,12 @@ body::after {
 }
 
 #map svg {
-    /*border: 1px solid #f4f4f4;*/
+    border: 1px solid #f4f4f4;
 }
 
 .tooltip {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 150, 250, 0.8);
     color: white;
     padding: 5px;
     border-radius: 5px;
@@ -31,10 +31,12 @@ body::after {
 
 #intro {
     text-align: center;
+    padding: 100px;
 }
 
 #viz {
-    /*background: white;*/
+    position: relative;
+    background: black;
     margin: 0;
     padding: 0;
 }
@@ -45,7 +47,8 @@ footer {
     width: 100%;
     height: 50px;
     margin: 0;
-    padding: 10;
+    padding: 10px;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: darkgrey;
+    color: whitesmoke;
 }
