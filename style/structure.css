@@ -1,6 +1,21 @@
+body{
+    width: 100%;
+}
 #viz {
-    display: flex;
+    display: block;
 }
 #globeContainer {
     display : block;
+}
+#diagram {
+    display: flex;
+}
+
+#map svg{
+    width: 100%;
+    height: 100%;
+}
+#lineGraph svg{
+    width: 100%;
+    height: 100%;
 }
