@@ -30,7 +30,7 @@ function init() {
     let svg = d3.select("#map")
         .append("svg")
         .attr("width", w)
-        .attr("height", h)
+        .attr("height", h);
 
     let globe = svg.append("circle")
         .attr("fill", "#EEE")
@@ -177,7 +177,7 @@ function init() {
                         .attr('id', "lineCountry");
                     svg.append('circle')
                         .attr('id', 'runningCircle')
-                        .attr('r', 5)
+                        .attr('r', 2)
                         .attr('fill', 'red')
                         .attr('cx', nzCentroid[0])
                         .attr('cy', nzCentroid[1])
