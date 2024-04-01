@@ -168,7 +168,7 @@ function init() {
                         .style("opacity", 1)
 
 
-                    var geoInterpolator = d3.geoInterpolate(nzLocation, lonlat);
+                    var geoInterpolator = d3.geoInterpolate(lonlat, nzLocation);
                     svg.append('path')
                         .datum({ type: 'LineString', coordinates: [nzLocation, lonlat] })
                         .attr('d', geoGenerator)
