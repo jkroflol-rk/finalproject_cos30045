@@ -1,9 +1,9 @@
 function init() {
-    let margin = {top: 10, right: 10, bottom: 10, left: 10},
-        width = 445 - margin.left - margin.right,
-        height = 445 - margin.top - margin.bottom;
+    let margin = { top: 10, right: 10, bottom: 10, left: 10 },
+        width = 600 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
+    // append the svg object to the body of the page
     let svg = d3.select("#treemap")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -13,7 +13,7 @@ function init() {
             "translate(" + margin.left + "," + margin.top + ")");
 
 
-    d3.csv("dataset/testtreemap.csv").then(function (data) {
+    d3.csv("dataset/data_treemap.csv").then(function (data) {
         // stratify the data: reformatting for d3.js
         const root = d3.stratify()
             .id(function (d) {
@@ -66,9 +66,9 @@ function init() {
                 return d.y0 + 20
             })    // +20 to adjust position (lower)
             .text(function (d) {
-                return d.data.name + ": " + d.data.value
+                return d.data.name + ": \n" + d.data.value
             })
-            .attr("font-size", "15px")
+            .attr("font-size", "10px")
             .attr("fill", "white")
     });
 }

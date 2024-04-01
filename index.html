@@ -22,6 +22,9 @@
   <body>
     <script src="script/choropleth.js"></script>
     <script src="script/linegraph.js"></script>
+    <script src="script/drawRadar.js"></script>
+    <script src="script/treemap.js"></script>
+    <script src="script/radarChart.js"></script>
     <!-- Main heading -->
     <div id="intro">
       <h1>New Zealand Migration</h1>
@@ -118,95 +121,6 @@
           across the lifespan.
         </p>
         <div id="treemap"></div>
-
-        <script src="script/treemap.js"></script>
-
-        <script src="script/radarChart.js"></script>
-        <script>
-          /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
-
-          //draw the radar chart
-
-          let color = d3
-            .scaleOrdinal()
-            .range(["#EDC951", "#CC333F", "#00A0B0"]);
-
-          //set up the radar chart
-
-          var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-            width =
-              Math.min(700, window.innerWidth - 10) -
-              margin.left -
-              margin.right,
-            height = Math.min(
-              width,
-              window.innerHeight - margin.top - margin.bottom - 20
-            );
-
-          let radarChartOptions = {
-            w: width,
-            h: height,
-            margin: margin,
-            maxValue: 0.5,
-            levels: 5,
-            roundStrokes: true,
-            color: color,
-          };
-
-          //data
-
-          let dataset = [
-            [
-              //iPhone
-              { axis: "NZ and Aus Citizens", value: 10 },
-              { axis: "Visitor", value: 20 },
-              { axis: "Work", value: 30 },
-              { axis: "Student", value: 40 },
-              { axis: "Resident", value: 50 },
-              { axis: "Other", value: 60 },
-            ],
-          ];
-
-          console.log(dataset);
-
-          d3.csv("dataset/nz_data.csv").then(function (data) {
-            for (var i = 0; i < data.length; i++) {
-              if (
-                data[i].year == 2020 &&
-                data[i].country == "Vietnam" &&
-                data[i].citizenship == "non-NZ"
-              ) {
-                if (data[i].visa === "NZ and Australian citizens") {
-                  dataset[0][0].value = parseInt(data[i].estimate);
-                  console.log("NZ", data[i].estimate);
-                }
-                if (data[i].visa === "Visitor") {
-                  dataset[0][1].value = parseInt(data[i].estimate);
-                  console.log("Visit", data[i].estimate);
-                }
-                if (data[i].visa === "Work") {
-                  dataset[0][2].value = parseInt(data[i].estimate);
-                  console.log("Work", data[i].estimate);
-                }
-                if (data[i].visa === "Student") {
-                  dataset[0][3].value = parseInt(data[i].estimate);
-                  console.log("Stu", data[i].estimate);
-                }
-                if (data[i].visa === "Resident") {
-                  dataset[0][4].value = parseInt(data[i].estimate);
-                  console.log("Res", data[i].estimate);
-                }
-                if (data[i].visa === "Other") {
-                  dataset[0][5].value = parseInt(data[i].estimate);
-                  console.log("Other", data[i].estimate);
-                }
-              }
-            }
-            RadarChart(".radarChart", dataset, radarChartOptions);
-          });
-
-          //Call function to draw the Radar chart
-        </script>
       </div>
     </div>
 

@@ -215,6 +215,7 @@ function init() {
                     const name = d.properties.name;
                     d3.select("#line").remove();
                     drawGraph(name);
+                    drawRadar(name);
                 });
 
             console.log(nzLocation);
