@@ -9,7 +9,10 @@ body{
 #globeContainer {
     display : block;
 }
-
+#body 
+{
+    background-color: white;
+}
 
 #diagram2 {
     display: flex;
