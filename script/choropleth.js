@@ -7,6 +7,7 @@ function init() {
     let nzLocation = [];
     let nzCentroid;
 
+
     const tooltip = d3.select("body")
         .append("div")
         .style("position", "absolute")
@@ -41,8 +42,8 @@ function init() {
         .attr("cy", h / 2)
         .attr("r", initialScale)
 
-    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 5000]).unknown('grey');
-    let selectedValue = 2013;
+    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 4000]).unknown('grey');
+    let selectedValue = 2018;
 
 
     var geoGenerator = d3.geoPath()
@@ -108,7 +109,9 @@ function init() {
                 }
             }
             d3.select("#mySlider").on("change", async function (d) {
+
                 selectedValue = this.value;
+                d3.select("#year").text(this.value);
                 console.log(selectedValue);
                 updateJson();
                 svg.selectAll("path").attr("fill", function (data) {
@@ -214,6 +217,7 @@ function init() {
                 .on("click", function (event, d) {
                     const name = d.properties.name;
                     d3.select("#line").remove();
+                    d3.select("#country").text(name);
                     drawGraph(name);
                     drawRadar(name);
                 });
@@ -254,8 +258,8 @@ function init() {
     function drawColorScaleBar(colorScale) {
         const legendSvg = d3.select("#legend")
             .append("svg")
-            .attr("width", 200)
-            .attr("height", 20);
+            .attr("width", 240)
+            .attr("height", 100);
 
         const gradient = legendSvg.append("defs")
             .append("linearGradient")
@@ -276,15 +280,16 @@ function init() {
         legendSvg.append("rect")
             .attr("width", 200)
             .attr("height", 20)
-            .style("fill", "url(#colorGradient)");
+            .style("fill", "url(#colorGradient)").attr("transform", "translate(150, 30)");
+        var scale = d3.scaleLinear()
+            .domain([0, 4000])
+            .range([0, 200]);
+        const legendAxis = d3.axisBottom(scale)
+            .ticks(5);
 
-        const legendAxis = d3.axisBottom(colorScale)
-            .ticks(5)
-            .tickSize(0)
-            .tickFormat(d3.format(".0f"));
 
         legendSvg.append("g")
-            .attr("transform", "translate(0, 20)")
+            .attr("transform", "translate(150, 55)")
             .call(legendAxis);
     }
 
