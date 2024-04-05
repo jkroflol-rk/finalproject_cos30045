@@ -29,33 +29,33 @@
     <!-- Main heading -->
     <div id="intro">
       <h1>New Zealand Migration</h1>
+      <p>
+        Explore the allure of New Zealand's stunning landscapes and rich culture
+        with New Zealand Migration Hub. We offer a wealth of data on migration
+        trends, providing insights into the reasons individuals choose to
+        relocate to this picturesque destination. Whether it's for employment
+        opportunities, educational pursuits, family ties, or the desire for a
+        fresh start, our platform offers comprehensive statistics to inform your
+        decision-making process.
+      </p>
+      <p>
+        This visualisation shows the migration patterns of New Zealanders
+        between 2013 and 2023. The data is sourced from the New Zealand
+        Department of Statistics.
+      </p>
     </div>
     <div id="body">
       <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
       <div id="viz">
         <div class="content">
-          <h1>Arrival choropleth map</h1>
-          <h2>Welcome to New Zealand Migration Hub</h2>
-          <p>
-            Are you considering a move to the breathtaking landscapes and
-            vibrant culture of New Zealand? Look no further! At New Zealand
-            Migration Hub, we're dedicated to guiding you through every step of
-            your migration journey. Whether you're relocating for work, study,
-            family, or simply seeking a new adventure, our comprehensive
-            resources and expert guidance will help you navigate the immigration
-            process with confidence.
-          </p>
-          <p>
-            This visualisation shows the migration patterns of New Zealanders
-            between 2000 and 2020. The data is sourced from the New Zealand
-            Department of Statistics.
-          </p>
+          <h2>Arrival choropleth map</h2>
           <p>
             Discover the flow of migration to New Zealand with our interactive
             choropleth map. This dynamic visualization allows users to track
             migration patterns over the years using a convenient slider feature.
             Hover over individual countries to uncover detailed information,
-            including the number of people arriving from each location. Whether
+            including the number of people arriving from each location. Click on
+            the countries to change the statistics of the charts below. Whether
             exploring historical trends or examining recent migration data, our
             map provides valuable insights into the diverse origins of New
             Zealand's population influx.
@@ -74,24 +74,25 @@
             <div id="year"><p>2018</p></div>
           </div>
           <div><h3 id="country">Brazil</h3></div>
-          <div id="reset"><button id="resetButton">Reset</button></div>
+          <div id="reset">
+            <button id="resetButton">Reset</button>
+          </div>
 
           <div id="diagram">
             <div class="tooltip"></div>
             <div id="map"></div>
-            <h2>Why Choose New Zealand?</h2>
-            <p>
-              New Zealand offers a unique blend of natural beauty, a high
-              quality of life, and a welcoming community. From the snow-capped
-              peaks of the Southern Alps to the pristine beaches of the North
-              Island, the country's diverse landscapes provide endless
-              opportunities for exploration and adventure. Aside from its
-              stunning scenery, New Zealand boasts a robust economy, world-class
-              healthcare and education systems, and a strong commitment to
-              environmental sustainability. The country consistently ranks high
-              in global surveys for quality of life, safety, and overall
-              well-being, making it an attractive destination for migrants
-              seeking a better future for themselves and their families.
+            <h2 style="text-align: center">
+              History Migration Line Chart by Country
+            </h2>
+            <p style="text-align: center">
+              The line chart below shows the migration history of the selected
+              country to New Zealand from 2013 to 2023. The chart provides
+              insights into the annual migration trends, highlighting the
+              fluctuations and patterns in the number of arrivals from each
+              country. By examining the historical migration data, users can
+              gain a deeper understanding of the relationship between New
+              Zealand and other nations, as well as the factors driving
+              migration between these countries.
             </p>
             <div id="lineGraph"></div>
           </div>
@@ -113,8 +114,8 @@
           </p>
         </div>
         <div class="radarChart"></div>
-        <h2>Age Group distribution</h2>
-        <p>
+        <h2 style="text-align: center">Age Group distribution</h2>
+        <p style="text-align: center">
           Age groups play a significant role in various aspects of society,
           including healthcare, education, marketing, and policy-making.
           Understanding the demographics of different age cohorts allows
@@ -137,5 +138,6 @@
       COS30045 Data Visualisation - 2024<br />
       Le Xuan Nhat, Duong Quang Thanh
     </footer>
+    <a href="#globeContainer" class="top"></a>
   </body>
 </html>
