@@ -1,7 +1,7 @@
 function drawGraph(country) {
-    let width = 550;
+    let width = 600;
     let height = 400;
-    let margin = 50;
+    let margin = 60;
     let svg = d3.select("#lineGraph")
         .append("svg")
         .attr("width", width)
@@ -25,8 +25,13 @@ function drawGraph(country) {
             .range([0, width - margin - 30]);
         svg.append("g")
             .attr("transform", "translate(" + margin + "," + (height - margin) + ")")
-            .call(d3.axisBottom(xScale));
-
+            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
+        svg.append("text")
+            .attr("class", "x-label")
+            .attr("text-anchor", "middle")
+            .attr("x", width / 2)
+            .attr("y", height - 6)
+            .text("Year");
         // Add Y axis
         let yScale = d3.scaleLinear()
             .domain([0, d3.max(dataset, d => d.y)])
@@ -34,7 +39,14 @@ function drawGraph(country) {
         svg.append("g")
             .call(d3.axisLeft(yScale))
             .attr("transform", "translate(" + margin + ", 0)");
-
+        svg.append("text")
+            .attr("class", "y label")
+            .attr("text-anchor", "middle")
+            .attr("y", 10)
+            .attr("dy", "0.2em")
+            .attr("x", -(height / 2))
+            .attr("transform", "rotate(-90)")
+            .text("Number of visitor");
         svg.append("path")
             .datum(dataset)
             .attr("fill", "none")
