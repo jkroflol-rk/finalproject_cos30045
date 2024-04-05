@@ -47,15 +47,15 @@ function init() {
     // let color = d3.scaleLinear().domain([1, 8000]).range(["#9ecae1","#08519c"])
 
     const colorsArray = [
-      "#f7fbff",
-      "#deebf7",
-      "#c6dbef",
-      "#9ecae1",
-      "#6baed6",
-      "#4292c6",
-      "#2171b5",
-      "#08519c",
-      "#08306b"
+        "#f7fbff",
+        "#deebf7",
+        "#c6dbef",
+        "#9ecae1",
+        "#6baed6",
+        "#4292c6",
+        "#2171b5",
+        "#08519c",
+        "#08306b"
     ];
 
     const color2 = colorsArray;
@@ -308,11 +308,22 @@ function init() {
 
         gradient.append("stop")
             .attr("offset", "0%")
-            .attr("stop-color", colorScale(0));
-
+            .attr("stop-color", colorScale(10));
+        gradient.append("stop")
+            .attr("offset", "25%")
+            .attr("stop-color", colorScale(200));
+        gradient.append("stop")
+            .attr("offset", "45%")
+            .attr("stop-color", colorScale(2000));
+        gradient.append("stop")
+            .attr("offset", "60%")
+            .attr("stop-color", colorScale(5000));
+        gradient.append("stop")
+            .attr("offset", "75%")
+            .attr("stop-color", colorScale(10000));
         gradient.append("stop")
             .attr("offset", "100%")
-            .attr("stop-color", colorScale(50000));
+            .attr("stop-color", colorScale(20000));
 
         legendSvg.append("rect")
             .attr("width", 200)
