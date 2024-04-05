@@ -12,6 +12,9 @@ function init() {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
+    let opacity = d3.scaleLinear()
+        .domain([1000, 100000])
+        .range([.5, 1])
 
     d3.csv("dataset/data_treemap.csv").then(function (data) {
         // stratify the data: reformatting for d3.js
@@ -52,7 +55,16 @@ function init() {
                 return d.y1 - d.y0;
             })
             .style("stroke", "black")
-            .style("fill", "#69b3a2");
+            .style("fill", "#69b3a2")
+            .style("opacity", function (d) {
+                return opacity(d.data.value)
+            })
+            .on("mouseover", function (d) {
+                d3.select(this).style("fill", "orange")
+            })
+            .on("mouseleave", function (d) {
+                d3.select(this).style("fill", "#69b3a2")
+            });
 
         // and to add the text labels
         svg
