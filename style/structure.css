@@ -63,7 +63,11 @@ body{
 #lineGraph svg{
     display: flex;
     margin: auto;
-    
+    position: relative;
+}
+
+#lineGraph {
+    position: relative;
 }
 
 .radarChart svg, #treemap svg {
