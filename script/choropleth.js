@@ -63,9 +63,11 @@ function init() {
     // Reverse the order of the array
     colorsArray.reverse();
 
-    let color = d3.scaleOrdinal().range(colorsArray);
+    //let color = d3.scaleOrdinal(d3.schemeBlues[5]).domain("a", "b", "c", "d", "e").unknown('grey');
 
-    let test = d3.scaleOrdinal().range(color2);
+    let color = d3.scaleThreshold([10, 50, 200, 1000, 2000, 4000, 5000, 10000, 20000], d3.schemeBlues[9]).unknown('grey');
+
+    //let test = d3.scaleOrdinal().range(color2);
 
     let selectedValue = 2018;
 
@@ -144,6 +146,17 @@ function init() {
                     } else {
                         return color(data.properties.value);
                     }
+                    // } else if (1000 > parseInt(data.properties.value) > 0) {
+                    //     return color("a");
+                    // } else if (2000 > data.properties.value > 1000) {
+                    //     return color("b");
+                    // } else if (3000 > data.properties.value > 2000) {
+                    //     return color("c");
+                    // } else if (4000 > data.properties.value > 3000) {
+                    //     return color("d");
+                    // }  else {
+                    //     return color("e");
+                    // }
                 })
                     .attr("class", function (d) {
                         return "country"
@@ -306,10 +319,11 @@ function init() {
             .attr("height", 20)
             .style("fill", "url(#colorGradient)").attr("transform", "translate(150, 30)");
         var scale = d3.scaleLinear()
-            .domain([0, 4000])
+            .domain([0, 25000])
             .range([0, 200]);
+
         const legendAxis = d3.axisBottom(scale)
-            .ticks(5);
+            .ticks(4);
 
 
         legendSvg.append("g")
