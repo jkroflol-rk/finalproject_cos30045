@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
     position: relative;
@@ -55,4 +59,30 @@ footer {
     text-align: center;
     background-color: darkgrey;
     color: whitesmoke;
+}
+
+.top {
+    margin-top: 120vh;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 40px;
+    right: 50px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    font-size: 50px;
+    background-color: lightblue;
+    border-radius: 5px;
+}
+
+/* The arrow style of the button */
+
+.top:before {
+    content: "";
+    position: absolute;
+    inset: 30%;
+    transform: translateY(20%) rotate(-45deg);
+    border-top: 5px solid #000;
+    border-right: 5px solid #000;
 }

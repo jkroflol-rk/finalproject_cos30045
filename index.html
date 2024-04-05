@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Meta information -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style/style.css" />
-    <link rel="stylesheet" href="style/structure.css" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style/style.css"/>
+    <link rel="stylesheet" href="style/structure.css"/>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@300&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@300&display=swap"
+            rel="stylesheet"
     />
     <title>New Zealand Migration</title>
 
     <style></style>
-  </head>
+</head>
 
-  <body>
+<body>
     <script src="script/choropleth.js"></script>
     <script src="script/linegraph.js"></script>
     <script src="script/drawRadar.js"></script>
@@ -27,113 +27,111 @@
     <script src="script/radarChart.js"></script>
     <!-- Main heading -->
     <div id="intro">
-      <h1>New Zealand Migration</h1>
+        <h1>New Zealand Migration</h1>
+        <p>
+            Explore the allure of New Zealand's stunning landscapes and rich culture with New Zealand Migration Hub. We
+            offer a wealth of data on migration trends, providing insights into the reasons individuals choose to
+            relocate to this picturesque destination. Whether it's for employment opportunities, educational pursuits,
+            family ties, or the desire for a fresh start, our platform offers comprehensive statistics to inform your
+            decision-making process.
+        </p>
+        <p>
+            This visualisation shows the migration patterns of New Zealanders
+            between 2013 and 2023. The data is sourced from the New Zealand
+            Department of Statistics.
+        </p>
     </div>
     <div id="body">
-      <div id="viz">
-        <div class="content">
-          <h1>Arrival choropleth map</h1>
-          <h2>Welcome to New Zealand Migration Hub</h2>
-          <p>
-            Are you considering a move to the breathtaking landscapes and
-            vibrant culture of New Zealand? Look no further! At New Zealand
-            Migration Hub, we're dedicated to guiding you through every step of
-            your migration journey. Whether you're relocating for work, study,
-            family, or simply seeking a new adventure, our comprehensive
-            resources and expert guidance will help you navigate the immigration
-            process with confidence.
-          </p>
-          <p>
-            This visualisation shows the migration patterns of New Zealanders
-            between 2000 and 2020. The data is sourced from the New Zealand
-            Department of Statistics.
-          </p>
-          <p>
-            Discover the flow of migration to New Zealand with our interactive
-            choropleth map. This dynamic visualization allows users to track
-            migration patterns over the years using a convenient slider feature.
-            Hover over individual countries to uncover detailed information,
-            including the number of people arriving from each location. Whether
-            exploring historical trends or examining recent migration data, our
-            map provides valuable insights into the diverse origins of New
-            Zealand's population influx.
-          </p>
-        </div>
-        <div id="globeContainer">
-          <div id="legend">
-            <input
-              type="range"
-              name="mySlider"
-              id="mySlider"
-              min="2013"
-              max="2023"
-              value="2018"
-            />
-            <div id="year"><p>2018</p></div>
-          </div>
-          <div><h3 id="country">Brazil</h3></div>
-          <div id="reset"><button id="resetButton">Reset</button></div>
+        <div id="viz">
+            <div class="content">
+                <h2>Arrival choropleth map</h2>
+                <p>
+                    Discover the flow of migration to New Zealand with our interactive
+                    choropleth map. This dynamic visualization allows users to track
+                    migration patterns over the years using a convenient slider feature.
+                    Hover over individual countries to uncover detailed information,
+                    including the number of people arriving from each location. Click on the countries
+                    to change the statistics of the charts below. Whether
+                    exploring historical trends or examining recent migration data, our
+                    map provides valuable insights into the diverse origins of New
+                    Zealand's population influx.
+                </p>
+            </div>
+            <div id="globeContainer">
+                <div id="legend">
+                    <input
+                            type="range"
+                            name="mySlider"
+                            id="mySlider"
+                            min="2013"
+                            max="2023"
+                            value="2018"
+                    />
+                    <div id="year"><p>2018</p></div>
+                </div>
+                <div><h3 id="country">Brazil</h3></div>
+                <div id="reset">
+                    <button id="resetButton">Reset</button>
+                </div>
 
-          <div id="diagram">
-            <div class="tooltip"></div>
-            <div id="map"></div>
-            <h2>Why Choose New Zealand?</h2>
-            <p>
-              New Zealand offers a unique blend of natural beauty, a high
-              quality of life, and a welcoming community. From the snow-capped
-              peaks of the Southern Alps to the pristine beaches of the North
-              Island, the country's diverse landscapes provide endless
-              opportunities for exploration and adventure. Aside from its
-              stunning scenery, New Zealand boasts a robust economy, world-class
-              healthcare and education systems, and a strong commitment to
-              environmental sustainability. The country consistently ranks high
-              in global surveys for quality of life, safety, and overall
-              well-being, making it an attractive destination for migrants
-              seeking a better future for themselves and their families.
+                <div id="diagram">
+                    <div class="tooltip"></div>
+                    <div id="map"></div>
+                    <h2 style="text-align: center">History Migration Line Chart by Country</h2>
+                    <p style="text-align: center">
+                        The line chart below shows the migration history of the selected
+                        country to New Zealand from 2013 to 2023. The chart provides
+                        insights into the annual migration trends, highlighting the
+                        fluctuations and patterns in the number of arrivals from each
+                        country. By examining the historical migration data, users can
+                        gain a deeper understanding of the relationship between New
+                        Zealand and other nations, as well as the factors driving
+                        migration between these countries.
+                    </p>
+                    <div id="lineGraph"></div>
+                </div>
+            </div>
+
+            <br/>
+            <div class="content">
+                <h2>The diversity of purpose</h2>
+
+                <p>
+                    Discover the diversity of purpose and age group in migration to New
+                    Zealand with our interactive radar chart. This dynamic visualization
+                    allows users to toggle between age groups and visa purposes,
+                    providing insights into the multifaceted nature of migration
+                    patterns. Whether exploring the distribution of age groups or
+                    examining the varied purposes behind migration, our radar chart
+                    offers valuable insights into the demographic and motivational
+                    aspects of New Zealand's migration influx.
+                </p>
+            </div>
+            <div class="radarChart"></div>
+            <h2 style="text-align: center">Age Group distribution</h2>
+            <p style="text-align: center">
+                Age groups play a significant role in various aspects of society,
+                including healthcare, education, marketing, and policy-making.
+                Understanding the demographics of different age cohorts allows
+                organizations and governments to tailor their services, products, and
+                initiatives to meet the specific needs and preferences of each group.
+            From the exuberance and curiosity of children to the wisdom and
+            experience of seniors, each age group brings its own set of
+            characteristics, challenges, and opportunities. By recognizing and
+            respecting the diversity within age demographics, societies can foster
+            inclusivity, promote intergenerational understanding, and create
+            environments that support the well-being and success of individuals
+            across the lifespan.
             </p>
-            <div id="lineGraph"></div>
-          </div>
-        </div>
-
-        <br />
-        <div class="content">
-          <h2>The diversity of purpose</h2>
-
-          <p>
-            Discover the diversity of purpose and age group in migration to New
-            Zealand with our interactive radar chart. This dynamic visualization
-            allows users to toggle between age groups and visa purposes,
-            providing insights into the multifaceted nature of migration
-            patterns. Whether exploring the distribution of age groups or
-            examining the varied purposes behind migration, our radar chart
-            offers valuable insights into the demographic and motivational
-            aspects of New Zealand's migration influx.
-          </p>
-        </div>
-        <div class="radarChart"></div>
-        <h2>Age Group distribution</h2>
-        <p>
-          Age groups play a significant role in various aspects of society,
-          including healthcare, education, marketing, and policy-making.
-          Understanding the demographics of different age cohorts allows
-          organizations and governments to tailor their services, products, and
-          initiatives to meet the specific needs and preferences of each group.
-          From the exuberance and curiosity of children to the wisdom and
-          experience of seniors, each age group brings its own set of
-          characteristics, challenges, and opportunities. By recognizing and
-          respecting the diversity within age demographics, societies can foster
-          inclusivity, promote intergenerational understanding, and create
-          environments that support the well-being and success of individuals
-          across the lifespan.
-        </p>
         <div id="treemap"></div>
-      </div>
     </div>
+</div>
 
-    <!-- Footer information -->
-    <footer>
-      COS30045 Data Visualisation - 2024<br />
-      Le Xuan Nhat, Duong Quang Thanh
-    </footer>
-  </body>
+<!-- Footer information -->
+<footer>
+    COS30045 Data Visualisation - 2024<br/>
+    Le Xuan Nhat, Duong Quang Thanh
+</footer>
+<a href="#globeContainer" class="top"></a>
+</body>
 </html>
