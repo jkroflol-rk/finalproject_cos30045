@@ -294,7 +294,16 @@ function init() {
     }
 
     // Call the function passing your color scale
-
+    d3.select("#reset").on("click", function (event, d) {
+        projection
+            .center([0, 0])
+            .scale(250)
+            .rotate([190, 50])
+            .translate([w / 2, h / 2]);
+        globe.attr("r", projection.scale());
+        path = d3.geoPath().projection(projection);
+        svg.selectAll("path").attr("d", path);
+    })
     drawColorScaleBar(color);
     svg.call(drag);
     svg.call(zoom);
