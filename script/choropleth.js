@@ -42,7 +42,31 @@ function init() {
         .attr("cy", h / 2)
         .attr("r", initialScale)
 
-    var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 4000]).unknown('grey');
+    //var color = d3.scaleSequential(d3.interpolateBlues).domain([0, 20000]).unknown('grey');
+
+    // let color = d3.scaleLinear().domain([1, 8000]).range(["#9ecae1","#08519c"])
+
+    const colorsArray = [
+      "#f7fbff",
+      "#deebf7",
+      "#c6dbef",
+      "#9ecae1",
+      "#6baed6",
+      "#4292c6",
+      "#2171b5",
+      "#08519c",
+      "#08306b"
+    ];
+
+    const color2 = colorsArray;
+
+    // Reverse the order of the array
+    colorsArray.reverse();
+
+    let color = d3.scaleOrdinal().range(colorsArray);
+
+    let test = d3.scaleOrdinal().range(color2);
+
     let selectedValue = 2018;
 
 
