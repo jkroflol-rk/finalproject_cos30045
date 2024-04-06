@@ -103,7 +103,7 @@ function drawGraph(country) {
             .on("mouseout", function (d) {
                 tooltip.transition()
                     .duration(500)
-                    .style("opacity", 1);
+                    .style("opacity", 0);
             });
 
 
