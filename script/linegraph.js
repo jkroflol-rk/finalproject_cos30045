@@ -90,16 +90,20 @@ function drawGraph(country) {
             .attr("cy", function (d) { return yScale(d.y); })
             .attr("r", 4)
             .attr("fill", "steelblue")
-            .on("mouseover", function (d) {
+            .on("mouseover", function (event, d) {
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tooltip.html("Visior: " + d.y);
+                tooltip.html("Visior: " + d.y)
+                    .style("left", (event.offsetX + 180) + "px")
+                    .style("top", (event.offsetY - 60) + "px");
+                ;
+                console.log(event);
             })
             .on("mouseout", function (d) {
                 tooltip.transition()
                     .duration(500)
-                    .style("opacity", 0);
+                    .style("opacity", 1);
             });
 
 
