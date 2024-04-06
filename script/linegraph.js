@@ -74,7 +74,7 @@ function drawGraph(country) {
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
-                .curve(d3.curveBasis)
+
                 .x(function (d) {
                     return xScale(d.x);
                 })
@@ -83,35 +83,32 @@ function drawGraph(country) {
                 })
             )
             .attr("transform", "translate(" + margin + ",0)");
+        svg.selectAll("circle")
+            .data(dataset)
+            .enter().append("circle")
+            .attr("cx", function (d) { return xScale(d.x) + margin; })
+            .attr("cy", function (d) { return yScale(d.y); })
+            .attr("r", 4)
+            .attr("fill", "steelblue")
+            .on("mouseover", function (d) {
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html("Visior: " + d.y);
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
 
-        // svg.on('mousemove', function (event) {
-        //     var index = parseInt(dataset.length * (event.x - margin) / (width - margin) - 14)
-        //     if (index > 0 && index < dataset.length) {
-        //         console.log(index, dataset[index])
-        //         d3.select(".hover-line").remove()
-        //         d3.select(".hover-text").remove()
-        //         svg.append("line")
-        //             .style("position", "absolute")
-        //             .attr("class", "hover-line")
-        //             .attr("x1", event.x)
-        //             .attr("y1", yScale(dataset[index].y))
-        //             .attr("x2", event.x)
-        //             .attr("y2", yScale(height) + 30)
-        //             .style("stroke", "black")
-        //             .style("stroke-width", 1);
-        //
-        //
-        //         svg.append("text")
-        //             .style("position", "absolute")
-        //             .attr("class", "hover-text")
-        //             .attr("x", event.x)
-        //             .attr("y", yScale(dataset[index].y))
-        //             .text(dataset[index].y)
-        //             .attr("text-anchor", "middle")
-        //             .style("font-weight", "600")
-        //             .style("fill", "black");
-        //     }
-        // });
+
+        let tooltip = d3.select("#lineGraph").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+
+
     });
 }
 
