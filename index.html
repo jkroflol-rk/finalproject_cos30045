@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="style/structure.css" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <title>New Zealand Migration</title>
 
     <style></style>
@@ -55,12 +58,15 @@
             <strong>Instruction for the visualisation:</strong>
             Discover the flow of migration to New Zealand with our interactive
             choropleth map. This dynamic visualization allows users to track
-            migration patterns over the years using a convenient <strong>slider</strong> feature.
-            <strong>Hover</strong> over individual countries to uncover detailed information,
-            including the number of people arriving from each location. <strong>Click</strong> on
-            the countries to change the statistics of the <a href="#b2">line chart</a> and <a href="#b3">radar chart</a> below. Other
-            functions includes <strong>scrolling</strong> to zoom, and <strong>dragging</strong> to move the
-            globe.
+            migration patterns over the years using a convenient
+            <strong>slider</strong> feature. <strong>Hover</strong> over
+            individual countries to uncover detailed information, including the
+            number of people arriving from each location.
+            <strong>Click</strong> on the countries to change the statistics of
+            the <a href="#b2">line chart</a> and
+            <a href="#b3">radar chart</a> below. Other functions includes
+            <strong>scrolling</strong> to zoom, and <strong>dragging</strong> to
+            move the globe.
           </p>
         </div>
         <div id="globeContainer">
@@ -75,7 +81,7 @@
             />
             <div id="year"><p>2023</p></div>
           </div>
-          <div><h3 id="country">Vietnam</h3></div>
+          <div><h3 class="countryName">Vietnam</h3></div>
           <div id="reset">
             <button id="resetButton">Reset</button>
           </div>
@@ -96,6 +102,7 @@
               Zealand and other nations, as well as the factors driving
               migration between these countries.
             </p>
+            <div><h3 class="countryName">Vietnam</h3></div>
             <div id="lineGraph"></div>
           </div>
         </div>
@@ -114,6 +121,7 @@
             aspects of New Zealand's migration influx.
           </p>
         </div>
+        <div><h3 class="countryName">Vietnam</h3></div>
         <div class="radarChart" id="radarChart"></div>
         <h2 style="text-align: center" id="b4">Age Group distribution</h2>
         <p style="text-align: center">
@@ -138,6 +146,8 @@
     <footer>
       COS30045 Data Visualisation - 2024<br />
       Le Xuan Nhat, Duong Quang Thanh
+      <br />
+      JabaScript Group
     </footer>
   </body>
 </html>

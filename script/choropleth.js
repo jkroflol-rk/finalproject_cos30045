@@ -254,7 +254,7 @@ function init() {
                 .on("click", function (event, d) {
                     const name = d.properties.name;
                     d3.select("#line").remove();
-                    d3.select("#country").text(name);
+                    d3.selectAll(".countryName").text(name);
                     drawGraph(name);
                     drawRadar(name);
                 });

@@ -33,7 +33,7 @@ body{
     
     padding: 10px;
 }
-#country {
+.countryName {
     text-align: center;
 }
 #diagram2 {
@@ -111,4 +111,8 @@ body{
     .sidenav a {
         font-size: 18px;
     }
+}
+.treeContent {
+    word-wrap: break-word;
+    max-width: 100px;
 }

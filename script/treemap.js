@@ -15,7 +15,7 @@ function init() {
     let opacity = d3.scaleLinear()
         .domain([1000, 100000])
         .range([.5, 1])
-
+    let color = d3.scaleThreshold([10, 50, 200, 1000, 2000, 4000, 5000, 10000, 20000], d3.schemeGreens[9])
     d3.csv("dataset/data_treemap.csv").then(function (data) {
         // stratify the data: reformatting for d3.js
         const root = d3.stratify()
@@ -55,15 +55,15 @@ function init() {
                 return d.y1 - d.y0;
             })
             .style("stroke", "black")
-            .style("fill", "#69b3a2")
+            .style("fill", function (d) { return color(d.data.value) })
             .style("opacity", function (d) {
-                return opacity(d.data.value)
+                return opacity(d.data.value / 10)
             })
             .on("mouseover", function (d) {
                 d3.select(this).style("fill", "orange")
             })
             .on("mouseleave", function (d) {
-                d3.select(this).style("fill", "#69b3a2")
+                d3.select(this).style("fill", function (d) { return color(d.data.value) })
             });
 
         // and to add the text labels
@@ -72,16 +72,20 @@ function init() {
             .data(root.leaves())
             .join("text")
             .attr("x", function (d) {
-                return d.x0 + 10
+                console.log(d);
+                return d.x0 + 5;
+
             })    // +10 to adjust position (more right)
             .attr("y", function (d) {
-                return d.y0 + 20
+                return d.y0 + 30
             })    // +20 to adjust position (lower)
             .text(function (d) {
                 return d.data.name + ": \n" + d.data.value
             })
-            .attr("font-size", "10px")
+            .attr("font-size", function (d) { return (d.x1 - d.x0) / 11 })
             .attr("fill", "white")
+            .attr("width", "10px")
+            .attr("class", "treeContent")
     });
 }
 
