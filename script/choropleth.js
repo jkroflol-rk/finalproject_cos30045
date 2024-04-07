@@ -1,7 +1,7 @@
 
 function init() {
-    let w = 1000;
-    let h = 700;
+    let w = 1200;
+    let h = 900;
     const sensitivity = 75;
 
     let nzLocation = [];
@@ -19,7 +19,7 @@ function init() {
     // Create a new projection using the Mercator projection
     let projection = d3.geoOrthographic()
         .center([0, 0])
-        .scale(300)
+        .scale(350)
         .rotate([190, 50])
         .translate([w / 2, h / 2]);
 
@@ -346,7 +346,7 @@ function init() {
     d3.select("#reset").on("click", function (event, d) {
         projection
             .center([0, 0])
-            .scale(300)
+            .scale(350)
             .rotate([190, 50])
             .translate([w / 2, h / 2]);
         globe.attr("r", projection.scale());

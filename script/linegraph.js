@@ -95,7 +95,7 @@ function drawGraph(country) {
                     .duration(200)
                     .style("opacity", .9);
                 tooltip.html("Visior: " + d.y)
-                    .style("left", (event.offsetX + 180) + "px")
+                    .style("left", (event.offsetX + 300) + "px")
                     .style("top", (event.offsetY - 60) + "px");
                 ;
                 console.log(event);

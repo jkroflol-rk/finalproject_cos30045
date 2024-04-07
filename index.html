@@ -23,6 +23,12 @@
     <script src="script/treemap.js"></script>
     <script src="script/radarChart.js"></script>
     <script src="script/component.js"></script>
+    <div class="sidenav">
+      <a href="#b1">Choropleth Map</a>
+      <a href="#b2">Line Chart</a>
+      <a href="#b3">Radar Chart</a>
+      <a href="#b4">Tree map</a>
+    </div>
     <!-- Main heading -->
     <div id="intro">
       <h1>New Zealand Migration</h1>
@@ -43,7 +49,7 @@
     </div>
     <div id="body">
       <div id="viz">
-        <div class="content">
+        <div class="content" id="b1">
           <h2>Arrival choropleth map</h2>
           <p>
             Discover the flow of migration to New Zealand with our interactive
@@ -78,7 +84,7 @@
           <div id="diagram">
             <div class="tooltip"></div>
             <div id="map"></div>
-            <h2 style="text-align: center">
+            <h2 style="text-align: center" id="b2">
               History Migration Line Chart by Country
             </h2>
             <p style="text-align: center">
@@ -97,8 +103,7 @@
 
         <br />
         <div class="content">
-          <h2>The diversity of purpose</h2>
-
+          <h2 id="b3">The diversity of purpose</h2>
           <p>
             Discover the diversity of purpose and age group in migration to New
             Zealand with our interactive radar chart. This dynamic visualization
@@ -110,8 +115,8 @@
             aspects of New Zealand's migration influx.
           </p>
         </div>
-        <div class="radarChart"></div>
-        <h2 style="text-align: center">Age Group distribution</h2>
+        <div class="radarChart" id="radarChart"></div>
+        <h2 style="text-align: center" id="b4">Age Group distribution</h2>
         <p style="text-align: center">
           Age groups play a significant role in various aspects of society,
           including healthcare, education, marketing, and policy-making.
@@ -135,6 +140,5 @@
       COS30045 Data Visualisation - 2024<br />
       Le Xuan Nhat, Duong Quang Thanh
     </footer>
-    <a href="#globeContainer" class="top"></a>
   </body>
 </html>

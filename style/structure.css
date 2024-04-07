@@ -77,3 +77,38 @@ body{
 .tooltip2 {
     position: absolute;
 }
+
+.sidenav {
+    right: 10px;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 40%;
+    background: #2196F3;
+    overflow-x: hidden;
+    padding: 8px 0;
+    border-radius: 10px;
+    border: black 3px solid;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #064579;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
