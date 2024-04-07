@@ -15,7 +15,7 @@ function init() {
     let opacity = d3.scaleLinear()
         .domain([1000, 100000])
         .range([.5, 1])
-    let color = d3.scaleThreshold([10, 50, 200, 1000, 2000, 4000, 5000, 10000, 20000], d3.schemeGreens[9])
+    let color = d3.scaleThreshold([10, 50, 200, 1000, 2000, 4000, 5000, 10000, 20000], d3.schemeBlues[9])
     d3.csv("dataset/data_treemap.csv").then(function (data) {
         // stratify the data: reformatting for d3.js
         const root = d3.stratify()

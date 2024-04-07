@@ -5,7 +5,7 @@
 
 let color = d3
     .scaleOrdinal()
-    .range(["#EDC951", "#CC333F", "#00A0B0"]);
+    .range(["#517ded"]);
 
 //set up the radar chart
 
